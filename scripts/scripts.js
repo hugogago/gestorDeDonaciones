@@ -24,8 +24,8 @@ function donar(elemento) {
     let cantidad = organizaciones[nombre];
 
     if (!cantidad) {
-        console.error("La organización " + nombre +" no está registrada.");
-        alert("La organización "+ nombre +" no está registrada.");
+        console.error("La organización " + nombre + " no está registrada.");
+        alert("La organización " + nombre + " no está registrada.");
         return;
     }
 
@@ -44,33 +44,30 @@ function finalizarDonacion() {
         return;
     }
 
+    donaciones.sort().reverse();
 
-    //contar todas las donaciones
+    // Contar todas las donaciones
     let resumen = {};
     donaciones.forEach(nombre => {
         resumen[nombre] = (resumen[nombre] || 0) + 1;
     });
 
 
-      //Ordenar 
-      const ordenar = Object.keys(resumen).sort().reverse();
+    let html = "<h2>Resumen de Donaciones</h2><ul>";
 
-      //Construir html del resumen
-      let html = "<h2>Resumen de Donaciones</h2><ul>";
-      ordenar.forEach(nombre => {
-          html += `<li>${nombre} ---- ${resumen[nombre]} aportación(es)</li>`;
-      });
-      html += "</ul>";
-  
-      const media = (total / donaciones.length).toFixed(2);
-      html += "<p>Donación final: " + total + "€</p>";
-      html += "<p>Donación media: " + media + "€ aportación</p>";
-  
-      resultado.innerHTML = html;
-  
-     
-      donaciones = [];
-      total = 0;
+    for (let nombre in resumen) {
+        html += `<li>${nombre} ---- ${resumen[nombre]} aportación(es)</li>`;
+    }
+
+    html += "</ul>";
+
+    const media = (total / donaciones.length).toFixed(2);
+    html += "<p>Donación final: " + total + "€</p>";
+    html += "<p>Donación media: " + media + "€ por aportación</p>";
+
+    resultado.innerHTML = html;
+
+
+    donaciones = [];
+    total = 0;
 }
-
-

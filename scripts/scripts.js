@@ -47,7 +47,7 @@ function finalizarDonacion() {
     donaciones.sort().reverse();
 
     // Contar todas las donaciones
-    let resumen = {};
+    let resumen = [];
     donaciones.forEach(nombre => {
         resumen[nombre] = (resumen[nombre] || 0) + 1;
     });

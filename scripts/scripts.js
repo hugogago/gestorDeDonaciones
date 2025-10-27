@@ -25,7 +25,6 @@ function donar(elemento) {
 
     if (!cantidad) {
         console.error("La organización " + nombre + " no está registrada.");
-        alert("La organización " + nombre + " no está registrada.");
         return;
     }
 

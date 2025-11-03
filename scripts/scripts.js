@@ -1,72 +1,63 @@
-let donaciones = [];
-let total = 0;
+
+let organizaciones = []; 
+let donaciones = []; 
+let ventana = null;  
+
+fetch("../datos/donaciones.json")
+  .then(function(respuesta) {
+    return respuesta.json();
+  })
+  .then(function(datos) {
+    organizaciones = datos.organizaciones;
+    console.log("Datos del JSON cargados correctamente.");
+  })
+  .catch(function(error) {
+    console.log("Error al cargar el JSON: " + error);
+  });
 
 
+function donar(imagen) {
+  let nombre = imagen.getAttribute("name");
+  let input = document.getElementById(nombre);
+  let cantidad = parseFloat(input.value);
 
-let organizaciones = {
-    "Cruz Roja": 5,
-    "UNICEF": 7,
-    "Médicos Sin Fronteras": 2,
-    "Save the Children": 1,
-    "WWF": 4,
-    "Greenpeace": 8,
-    "Caritas": 2,
-    "Manos Unidas": 5,
-    "Aldeas Infantiles": 6,
-    "Fundación Vicente Ferrer": 4
-};
+  if (isNaN(cantidad) || cantidad <= 0) {
+    alert("Introduce una cantidad válida para donar.");
+    return;
+  }
 
+ 
+  donaciones.push({ nombre: nombre, cantidad: cantidad });
 
-function donar(elemento) {
-    document.getElementById("resultado").innerHTML = "";
-
-    let nombre = elemento.getAttribute("name");
-    let cantidad = organizaciones[nombre];
-
-    if (!cantidad) {
-        console.error("La organización " + nombre + " no está registrada.");
-        return;
-    }
+  
+  mostrarHistorial(nombre, cantidad);
 
 
-    donaciones.push(nombre);
-    total += cantidad;
-
-    console.log("Has donado a: " + nombre + " - Cantidad: " + cantidad + "€");
+  input.value = "";
 }
 
-function finalizarDonacion() {
-    let resultado = document.getElementById("resultado");
+//panel lateral 
+function mostrarHistorial(nombre, cantidad) {
+  let historial = document.getElementById("historial");
 
-    if (donaciones.length === 0) {
-        resultado.innerHTML = "<p>No has realizado ninguna donación.</p>";
-        return;
+  
+  let linea = document.createElement("div");
+  linea.className = "linea";
+  linea.textContent = nombre + " — " + cantidad + "€";
+
+ 
+  historial.appendChild(linea);
+
+  // quitar el resaltado anterior
+  let todas = historial.getElementsByClassName("linea");
+  for (let i = 0; i < todas.length; i++) {
+    todas[i].classList.remove("resaltado");
+  }
+
+  // resaltar la linea 
+  for (let i = 0; i < todas.length; i++) {
+    if (todas[i].textContent.indexOf(nombre) === 0) {
+      todas[i].classList.add("resaltado");
     }
-
-    donaciones.sort().reverse();
-
-    // Contar todas las donaciones
-    let resumen = [];
-    donaciones.forEach(nombre => {
-        resumen[nombre] = (resumen[nombre] || 0) + 1;
-    });
-
-
-    let html = "<h2>Resumen de Donaciones</h2><ul>";
-
-    for (let nombre in resumen) {
-        html += `<li>${nombre} ---- ${resumen[nombre]} aportación(es)</li>`;
-    }
-
-    html += "</ul>";
-
-    const media = (total / donaciones.length).toFixed(2);
-    html += "<p>Donación final: " + total + "€</p>";
-    html += "<p>Donación media: " + media + "€ por aportación</p>";
-
-    resultado.innerHTML = html;
-
-
-    donaciones = [];
-    total = 0;
+  }
 }

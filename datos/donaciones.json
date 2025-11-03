@@ -1,0 +1,82 @@
+{
+    "organizaciones": [
+        {
+            "id": 1,
+            "nombre": "Cruz Roja",
+            "acogida": true,
+            "rangoEdad": "tercera edad"
+        },
+        {
+            "id": 2,
+            "nombre": "UNICEF",
+            "acogida": false,
+            "rangoEdad": "infancia"
+        },
+        {
+            "id": 3,
+            "nombre": "Médicos Sin Fronteras",
+            "acogida": false,
+            "rangoEdad": "adolescencia"
+        },
+        {
+            "id": 4,
+            "nombre": "Save the Children",
+            "acogida": false,
+            "rangoEdad": "infancia"
+        },
+        {
+            "id": 5,
+            "nombre": "WWF",
+            "multiraza": true,
+            "ambito": "internacional"
+        },
+        {
+            "id": 6,
+            "nombre": "Greenpeace",
+            "multiraza": true,
+            "ambito": "nacional"
+        },
+        {
+            "id": 7,
+            "nombre": "Caritas",
+            "acogida": true,
+            "rangoEdad": "tercera edad"
+        },
+        {
+            "id": 8,
+            "nombre": "Manos Unidas",
+            "acogida": false,
+            "rangoEdad": "adolescencia"
+        },
+        {
+            "id": 9,
+            "nombre": "Aldeas Infantiles",
+            "acogida": true,
+            "rangoEdad": "infancia"
+        },
+        {
+            "id": 10,
+            "nombre": "Fundación Vicente Ferrer",
+            "acogida": false,
+            "rangoEdad": "tercera edad"
+        }
+    ],
+    "tramiteDonacion": [
+        {
+            "id": 1,
+            "fecha": "10/2025",
+            "donaciones": [
+                {
+                    "idOrganizacion": 2,
+                    "importeTotal": 45.78,
+                    "numDonaciones": 5
+                },
+                {
+                    "idOrganizacion": 5,
+                    "importeTotal": 37.23,
+                    "numDonaciones": 2
+                }
+            ]
+        }
+    ]
+}

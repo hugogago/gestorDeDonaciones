@@ -1,43 +1,108 @@
 body {
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
-    background: #f7f7f7;
+    background-color: #f7f7f7;
+    overflow-y: auto;
 }
 
-.general {
-    display: grid;
+h1 {
     text-align: center;
-    display: flex;
-    padding: 20px;
-    margin-left: 1%;
+    margin-top: 20px;
 }
+
+.contenedor {
+    display: flex;
+    min-height: 80vh; 
+}
+
+
+.general {
+    width: 75%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    gap: 20px;
+    padding: 10px;
+}
+
 
 .recuadro {
     background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px #0001;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    padding: 16px;
+    padding: 10px;
+    width: 150px;
+    height: 200px;
 }
 
 .recuadro img {
-    width: 120px;
-    height: 120px;
-    border-radius: 8px;
-    margin-bottom: 12px;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
 }
 
-.recuadro .nombre {
-    font-size: 1.1em;
+.nombre {
     font-weight: bold;
-    color: #333;
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+
+.recuadro input {
+    width: 80%;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.lateral {
+    width: 25%;
+    background: #f0f0f0;
+    border-left: 2px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.lateral h3 {
+    text-align: center;
+}
+
+.linea {
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.resaltado {
+    background-color: #ffe7a1;
+}
+
+
+.accion {
+    text-align: center;
+    margin: 20px 0;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1359a5;
 }
 
 .resultado {
     text-align: center;
-    margin: 20px;
-}
-
-.accion {
-    text-align: center;
-    margin: 20px;
+    margin: 10px;
 }

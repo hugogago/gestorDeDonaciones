@@ -61,3 +61,120 @@ function mostrarHistorial(nombre, cantidad) {
     }
   }
 }
+
+
+function finalizarDonacion() {
+  let resultado = document.getElementById("resultado");
+
+  if (donaciones.length === 0) {
+    resultado.innerHTML = "<p>No has realizado ninguna donación.</p>";
+    return;
+  }
+
+  let fecha = new Date();
+  let texto = "<h2>Resumen de Donaciones</h2>";
+  texto += "<p>Fecha: " + fecha.toLocaleDateString() + " " + fecha.toLocaleTimeString() + "</p><ul>";
+
+ 
+  let nombres = [];
+
+  
+  for (let i = 0; i < donaciones.length; i++) {
+    let nombre = donaciones[i].nombre;
+
+   
+    let encontrado = false;
+    for (let j = 0; j < nombres.length; j++) {
+      if (nombres[j] === nombre) {
+        encontrado = true;
+      }
+    }
+
+    
+    if (!encontrado) {
+      nombres.push(nombre);
+    }
+  }
+
+  
+  nombres.sort();
+  nombres.reverse();
+
+ 
+  let totalGlobal = 0;
+  let totalDonaciones = 0;
+
+ 
+  for (let i = 0; i < nombres.length; i++) {
+    let nombre = nombres[i];
+    let suma = 0;
+    let contador = 0;
+
+   
+    for (let j = 0; j < donaciones.length; j++) {
+      if (donaciones[j].nombre === nombre) {
+        suma += donaciones[j].cantidad;
+        contador++;
+      }
+    }
+
+    let media = suma / contador;
+
+    texto += "<li>" + nombre + " ---- " + contador + " donaciones --- " +
+      media.toFixed(2) + "€ --- " + suma.toFixed(2) + "€</li>";
+
+    totalGlobal += suma;
+    totalDonaciones += contador;
+  }
+
+  texto += "</ul>";
+  texto += "<p><strong>Aporte total:</strong> " + Math.floor(totalGlobal) + " €</p>";
+  texto += "<p><strong>Aporte medio:</strong> " + (totalGlobal / totalDonaciones).toFixed(3) + " €/donación</p>";
+// to fixed para redondear a 3 decimales y math floor para redondear hacia abajo --> POO y objetos nativos 
+  resultado.innerHTML = texto;
+
+  
+  mostrarVentana(nombres);
+
+  
+  setTimeout(function() {
+    document.getElementById("historial").innerHTML = "";
+    resultado.innerHTML = "";
+    donaciones = [];
+    if (ventana && !ventana.closed) {
+      ventana.close();
+    }
+  }, 10000);
+}
+
+
+function mostrarVentana(nombres) {
+  let texto = "";
+
+ 
+  for (let i = 0; i < nombres.length; i++) {
+    let nombre = nombres[i];
+
+    
+    let org = null;
+    for (let j = 0; j < organizaciones.length; j++) {
+      if (organizaciones[j].nombre === nombre) {
+        org = organizaciones[j];
+      }
+    }
+
+    
+    if (org) {
+      if (org.acogida !== undefined) {
+        texto += org.nombre + " trabaja con personas (" + org.rangoEdad + ") y " +
+          (org.acogida ? "sí" : "no") + " tramita acogidas.<br>";
+      } else if (org.multiraza !== undefined) {
+        texto += org.nombre + " trabaja con animales a nivel " + org.ambito + ".<br>";
+      }
+    }
+  }
+
+  
+  ventana = window.open("", "info", "width=500,height=400");
+  ventana.document.write("<h3>Información de las Organizaciones</h3>" + texto);
+}

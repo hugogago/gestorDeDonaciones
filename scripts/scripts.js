@@ -21,7 +21,7 @@ function donar(imagen) {
     let cantidad = parseFloat(input.value);
 
     if (isNaN(cantidad) || cantidad <= 0) {
-        alert("Introduce una cantidad válida para donar.");
+        
         return;
     }
 
@@ -176,7 +176,7 @@ function mostrarVentana(nombres) {
         }
     }
 
-    // Abrimos una nueva ventana (BOM)
+    // Abrimos ventana emergente
     ventana = window.open("", "info", "width=500,height=400");
     ventana.document.write("<h3>Información de las Organizaciones</h3>" + texto);
 }

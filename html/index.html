@@ -3,94 +3,62 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestor de Donaciones</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
+
   <h1>ONGs Destacadas</h1>
 
   <div class="contenedor">
 
-    <div class="general">
-      <div class="recuadro">
-        <img src="../imagenes/cruzRoja.png" name="Cruz Roja" onclick="donar(this)">
-        <div class="nombre">Cruz Roja</div>
-        <input type="number" id="Cruz Roja" placeholder="Cantidad (€)" min="0">
+      <div class="general" id="zonaONG"></div>
+
+      <div class="lateral">
+        <h3>Donaciones realizadas</h3>
+        <div id="historial"></div>
       </div>
 
-      <div class="recuadro">
-        <img src="../imagenes/uniceflogo.png" name="UNICEF" onclick="donar(this)">
-        <div class="nombre">UNICEF</div>
-        <input type="number" id="UNICEF" placeholder="Cantidad (€)" min="0">
-      </div>
-
-      <div class="recuadro">
-        <img src="../imagenes/medicossinfronteras.jpg" name="Médicos Sin Fronteras" onclick="donar(this)">
-        <div class="nombre">Médicos Sin Fronteras</div>
-        <input type="number" id="Médicos Sin Fronteras" placeholder="Cantidad (€)" min="0">
-      </div>
-
-      <div class="recuadro">
-        <img src="../imagenes/savethechildren.png" name="Save the Children" onclick="donar(this)">
-        <div class="nombre">Save the Children</div>
-        <input type="number" id="Save the Children" placeholder="Cantidad (€)" min="0">
-      </div>
-
-      <div class="recuadro">
-        <img src="../imagenes/wwf.jpg" name="WWF" onclick="donar(this)">
-        <div class="nombre">WWF</div>
-        <input type="number" id="WWF" placeholder="Cantidad (€)" min="0">
-      </div>
-
-      <div class="recuadro">
-        <img src="../imagenes/greenpeace.jpg" name="Greenpeace" onclick="donar(this)">
-        <div class="nombre">Greenpeace</div>
-        <input type="number" id="Greenpeace" placeholder="Cantidad (€)" min="0">
-      </div>
-
-      <div class="recuadro">
-        <img src="../imagenes/caritas.png" name="Caritas" onclick="donar(this)">
-        <div class="nombre">Caritas</div>
-        <input type="number" id="Caritas" placeholder="Cantidad (€)" min="0">
-      </div>
-
-      <div class="recuadro">
-        <img src="../imagenes/manosunidas.png" name="Manos Unidas" onclick="donar(this)">
-        <div class="nombre">Manos Unidas</div>
-        <input type="number" id="Manos Unidas" placeholder="Cantidad (€)" min="0">
-      </div>
-
-      <div class="recuadro">
-        <img src="../imagenes/aldeasInfantiles.png" name="Aldeas Infantiles" onclick="donar(this)">
-        <div class="nombre">Aldeas Infantiles</div>
-        <input type="number" id="Aldeas Infantiles" placeholder="Cantidad (€)" min="0">
-      </div>
-
-      <div class="recuadro">
-        <img src="../imagenes/fundaciónFerrer.png" name="Fundación Vicente Ferrer" onclick="donar(this)">
-        <div class="nombre">Fundación Vicente Ferrer</div>
-        <input type="number" id="Fundación Vicente Ferrer" placeholder="Cantidad (€)" min="0">
-      </div>
-    </div>
-
-    <div class="lateral">
-      <h3>Donaciones realizadas</h3>
-      <div id="historial"></div>
-    </div>
   </div>
 
-    <div class="accion">
-    <button id="finalizar" onclick="finalizarDonacion()">Finalizar Donaciones</button>
-  </div>
+  <div class="formulario">
+    <h2>Datos del Donante</h2>
 
-  <div id="resultado" class="resultado"></div>
+    <form id="formularioDonacion">
+
+      <label id="Nombre">Nombre:</label><br>
+      <input type="text" id="inputNombre" required minlength="2"><br><br>
+
+      <label id="Apellido">Apellido:</label><br>
+      <input type="text" id="inputApellido" required minlength="2"><br><br>
+
+      <label id="Dirección">Dirección:</label><br>
+      <input type="text" id="inputDireccion" required minlength="5"><br><br>
+
+      <label id="Correo">Correo electrónico:</label><br>
+      <input type="email" id="inputCorreo" required><br><br>
+
+      <label>Forma de pago:</label><br>
+      <input type="radio" name="formaPago" value="Tarjeta" required> Tarjeta<br>
+      <input type="radio" name="formaPago" value="Transferencia" required> Transferencia<br><br>
+
+      <label>¿Es socio?</label><br>
+      <input type="radio" name="esSocio" value="Si" id="socioSi"> Sí<br>
+      <input type="radio" name="esSocio" value="No" id="socioNo" checked> No<br><br>
+
+      <div id="zonaCodigoSocio" >
+        <label id="socio">Código de socio:</label><br>
+        <input type="text" id="inputCodigoSocio" minlength="3"><br><br>
+      </div>
+
+      <button type="button" id="botonRealizarDonacion">Realizar donación</button>
+      <button type="button" id="botonLimpiarFormulario">Limpiar formulario</button>
+
+    </form>
+  </div>
 
   <script src="../scripts/scripts.js"></script>
-</body>
-</html>
 
 </body>
-
 </html>

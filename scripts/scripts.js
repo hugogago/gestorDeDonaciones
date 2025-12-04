@@ -144,4 +144,76 @@ function validarFormulario() {
     abrirVentana();
 }
 
+function abrirVentana() {
+    ventanaResumen = window.open("../html/resumen.html", "ventana", "width=500,height=300");
 
+    ventanaResumen.onload = function () {
+        let doc = ventanaResumen.document;
+
+        doc.getElementById("contenidoResumen").innerHTML = obtenerResumen();
+
+        doc.getElementById("volver").addEventListener("click", function () {
+            ventanaResumen.close();
+        });
+
+        doc.getElementById("terminar").addEventListener("click", function () {
+            finalizarDonacion();
+            ventanaResumen.close();
+        });
+    };
+}
+
+function obtenerResumen() {
+    let texto = "<ul>";
+
+    let nombres = [];
+
+    for (let i = 0; i < listaDonaciones.length; i++) {
+        if (!nombres.includes(listaDonaciones[i].nombre)) {
+            nombres.push(listaDonaciones[i].nombre);
+        }
+    }
+
+    for (let i = 0; i < nombres.length; i++) {
+        let nombre = nombres[i];
+        let total = 0;
+        let cantidad = 0;
+
+        for (let j = 0; j < listaDonaciones.length; j++) {
+            if (listaDonaciones[j].nombre === nombre) {
+                total += listaDonaciones[j].cantidad;
+                cantidad++;
+            }
+        }
+
+        texto += "<li>" + nombre + ": " + total.toFixed(2) + "€ (" + cantidad + " aportaciones)</li>";
+    }
+
+    texto += "</ul>";
+    return texto;
+}
+
+function finalizarDonacion() {
+    document.getElementById("historial").innerHTML = "";
+    listaDonaciones = [];
+    document.getElementById("formularioDonacion").reset();
+    document.getElementById("zonaCodigoSocio").style.display = "none";
+    alert("Donación finalizada correctamente.");
+}
+
+function limpiarFormulario() {
+    let form = document.getElementById("formularioDonacion");
+    form.reset();
+
+    document.getElementById("zonaCodigoSocio").style.display = "none";
+
+    let etiquetas = ["Nombre", "Apellido", "Direccion", "Correo", "socio"];
+    for (let i = 0; i < etiquetas.length; i++) {
+        let el = document.getElementById(etiquetas[i]);
+        if (el) {
+            el.style.color = "black";
+        }
+    }
+}
+
+cargarOrganizaciones();

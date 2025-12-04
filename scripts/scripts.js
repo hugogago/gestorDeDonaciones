@@ -48,3 +48,100 @@ function crearOrganizaciones() {
         zona.appendChild(div);
     }
 }
+
+function donar(nombre, cantidad) {
+    if (isNaN(cantidad) || cantidad <= 0) {
+        alert("Introduce una cantidad válida.");
+        return;
+    }
+
+    listaDonaciones.push({ nombre: nombre, cantidad: cantidad });
+
+    let zona = document.getElementById("historial");
+
+    let linea = document.createElement("div");
+    linea.className = "linea";
+    linea.textContent = nombre + " — " + cantidad + "€";
+    zona.appendChild(linea);
+
+    let lineas = zona.getElementsByClassName("linea");
+    for (let i = 0; i < lineas.length; i++) {
+        lineas[i].classList.remove("resaltado");
+    }
+
+    for (let i = 0; i < lineas.length; i++) {
+        if (lineas[i].textContent.indexOf(nombre) === 0) {
+            lineas[i].classList.add("resaltado");
+        }
+    }
+
+    zona.scrollTop = zona.scrollHeight;
+}
+
+document.getElementById("socioSi").addEventListener("click", function () {
+    document.getElementById("zonaCodigoSocio").style.display = "block";
+});
+
+document.getElementById("socioNo").addEventListener("click", function () {
+    document.getElementById("zonaCodigoSocio").style.display = "none";
+});
+
+document.getElementById("botonRealizarDonacion").addEventListener("click", validarFormulario);
+
+document.getElementById("botonLimpiarFormulario").addEventListener("click", limpiarFormulario);
+
+function validarFormulario() {
+    let nombre = document.getElementById("inputNombre");
+    let apellido = document.getElementById("inputApellido");
+    let direccion = document.getElementById("inputDireccion");
+    let correo = document.getElementById("inputCorreo");
+
+    let errores = [];
+
+    if (nombre.value.length < 2) {
+        errores.push("Nombre no válido.");
+        document.getElementById("Nombre").style.color = "red";
+    } else {
+        document.getElementById("Nombre").style.color = "black";
+    }
+
+    if (apellido.value.length < 2) {
+        errores.push("Apellido no válido.");
+        document.getElementById("Apellido").style.color = "red";
+    } else {
+        document.getElementById("Apellido").style.color = "black";
+    }
+
+    if (direccion.value.length < 5) {
+        errores.push("Dirección no válida.");
+        document.getElementById("Direccion").style.color = "red";
+    } else {
+        document.getElementById("Direccion").style.color = "black";
+    }
+
+    if (!correo.value.includes("@")) {
+        errores.push("Correo no válido.");
+        document.getElementById("Correo").style.color = "red";
+    } else {
+        document.getElementById("Correo").style.color = "black";
+    }
+
+    if (document.getElementById("socioSi").checked) {
+        let codigo = document.getElementById("inputCodigoSocio");
+        if (codigo.value.length < 3) {
+            errores.push("Código de socio no válido.");
+            document.getElementById("socio").style.color = "red";
+        } else {
+            document.getElementById("socio").style.color = "black";
+        }
+    }
+
+    if (errores.length > 0) {
+        alert("Errores:\n\n" + errores.join("\n"));
+        return;
+    }
+
+    abrirVentana();
+}
+
+
